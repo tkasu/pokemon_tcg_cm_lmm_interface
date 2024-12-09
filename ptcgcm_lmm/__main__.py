@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from openai import OpenAI
+from langchain_openai import ChatOpenAI
 
 from ptcgcm_lmm.prompts import SYSTEM_PROMPT
 
@@ -7,21 +7,25 @@ load_dotenv()
 
 
 def main():
-    client = OpenAI()
-
-    completion = client.chat.completions.create(
+    llm = ChatOpenAI(
         model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {
-                "role": "user",
-                "content": "Decsribe Sword and Shield 151 series Blastoise-Ex card for me:",
-            },
-        ],
+        temperature=0,
+        max_tokens=None,
+        timeout=None,
+        max_retries=2,
     )
 
-    #print(completion)
-    print(completion.choices[0].message)
+    messages = [
+        ("system", SYSTEM_PROMPT),
+        (
+            "user",
+            "Decsribe Sword and Shield 151 series Blastoise-Ex card for me:",
+        ),
+    ]
+
+    ai_message = llm.invoke(messages)
+
+    print(ai_message)
 
 
 if __name__ == "__main__":

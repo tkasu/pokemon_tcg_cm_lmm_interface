@@ -25,7 +25,7 @@ class Attack(BaseModel):
     name: str = Field(..., description="Name of the attack")
     costs: list[Cost] = Field(..., description="Costs of the attack")
     effect: str = Field(..., description="Effect of the attack")
-    damage: int = Field(..., description="Damage of the attack")
+    damage: str = Field(..., description="Damage of the attack")
 
 
 class Card(BaseModel):

@@ -1,4 +1,4 @@
-# Pokemon TCG Collection Manager LMM Interface
+# WIP Pokemon TCG Collection Manager LMM Interface
 
 ## Requirements
 
@@ -15,4 +15,5 @@ https://docs.smith.langchain.com/
 
 ## Run the development script (WIP)
 
-- `uv run python -m ptcgcm_lmm`
+- `uv run python -m ptcgcm_lmm.text_invoke`
+- `uv run python -m ptcgcm_lmm.image_invoke`

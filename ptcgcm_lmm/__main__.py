@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from pprint import pprint
 
+from langchain_openai import ChatOpenAI
+from ptcgcm_lmm.models import Card
 from ptcgcm_lmm.prompts import SYSTEM_PROMPT
 
 load_dotenv()
@@ -14,6 +16,7 @@ def main():
         timeout=None,
         max_retries=2,
     )
+    structured_card_llm = llm.with_structured_output(Card)
 
     messages = [
         ("system", SYSTEM_PROMPT),
@@ -23,9 +26,8 @@ def main():
         ),
     ]
 
-    ai_message = llm.invoke(messages)
-
-    print(ai_message)
+    ai_message: Card = structured_card_llm.invoke(messages)
+    pprint(ai_message.model_dump())
 
 
 if __name__ == "__main__":
